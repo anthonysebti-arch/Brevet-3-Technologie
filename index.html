@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techno 3ème — Révision Brevet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ff:'DM Sans',sans-serif;
+  --dic-h:#0C447C;--dic-l:#E6F1FB;--dic-m:#378ADD;
+  --ots-h:#085041;--ots-l:#E1F5EE;--ots-m:#1D9E75;
+  --mso-h:#633806;--mso-l:#FAEEDA;--mso-m:#BA7517;
+  --ip-h:#4B1528;--ip-l:#FBEAF0;--ip-m:#D4537E;
+  --bg:#ffffff;--bg2:#f5f5f4;--bg3:#fafaf9;
+  --txt:#1c1917;--txt2:#78716c;--txt3:#a8a29e;
+  --brd:rgba(0,0,0,.12);--brd2:rgba(0,0,0,.2);
+  --ok-bg:#f0fdf4;--ok-fg:#15803d;--ok-brd:#86efac;
+  --ko-bg:#fef2f2;--ko-fg:#dc2626;--ko-brd:#fca5a5;
+  --info-bg:#eff6ff;--info-fg:#1d4ed8;
+  --rad:10px;--rad-lg:14px;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1c1917;--bg2:#292524;--bg3:#1c1917;
+    --txt:#fafaf9;--txt2:#a8a29e;--txt3:#78716c;
+    --brd:rgba(255,255,255,.12);--brd2:rgba(255,255,255,.22);
+    --ok-bg:#052e16;--ok-fg:#4ade80;--ok-brd:#166534;
+    --ko-bg:#450a0a;--ko-fg:#f87171;--ko-brd:#991b1b;
+    --info-bg:#1e3a5f;--info-fg:#93c5fd;
+  }
+}
+body{font-family:var(--ff);background:var(--bg3);color:var(--txt);min-height:100vh;display:flex;justify-content:center}
+#app{width:100%;max-width:680px;padding:1.5rem 1rem 3rem;background:var(--bg3)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.page{display:none}.page.on{display:block}
+a.back{font-size:12px;color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:1rem;text-decoration:none;letter-spacing:.02em}
+a.back:hover{color:var(--txt)}
+
+/* HOME */
+.home-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem}
+.home-ttl{font-size:20px;font-weight:600;line-height:1.2}
+.home-ttl span{font-size:12px;display:block;font-weight:400;color:var(--txt2);margin-top:2px}
+.xtag{display:inline-flex;align-items:center;background:var(--bg2);border:0.5px solid var(--brd);border-radius:99px;padding:4px 10px;font-size:11px;color:var(--txt2)}
+.prog-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
+.prog-cell{background:var(--bg2);border-radius:var(--rad);padding:10px 8px;text-align:center}
+.prog-val{font-size:22px;font-weight:600}
+.prog-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2);margin-top:1px}
+.th-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem}
+.th-card{border:0.5px solid var(--brd);border-radius:var(--rad-lg);padding:14px;cursor:pointer;background:var(--bg);transition:transform .12s,border-color .12s;position:relative;overflow:hidden}
+.th-card:hover{transform:translateY(-1px);border-color:var(--brd2)}
+.th-bar{position:absolute;bottom:0;left:0;height:3px;transition:width .6s}
+.th-abbr{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.th-name{font-size:12px;font-weight:500;line-height:1.35;margin-bottom:6px;color:var(--txt)}
+.th-stat{font-size:11px;color:var(--txt2)}
+.mode-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--txt2);margin-bottom:8px}
+.mode-btn{display:flex;align-items:center;gap:12px;width:100%;border:0.5px solid var(--brd);border-radius:var(--rad-lg);padding:13px 14px;cursor:pointer;background:var(--bg);text-align:left;transition:all .12s;margin-bottom:8px;font-family:var(--ff)}
+.mode-btn:hover{background:var(--bg2);border-color:var(--brd2)}
+.mode-ico{width:36px;height:36px;border-radius:var(--rad);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.mode-txt .mn{font-size:13px;font-weight:500;color:var(--txt)}
+.mode-txt .md{font-size:11px;color:var(--txt2);margin-top:2px}
+.mode-arr{margin-left:auto;color:var(--txt2);font-size:16px}
+
+/* THEME PICKER */
+.th-picker{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem}
+.th-pick{border:0.5px solid var(--brd);border-radius:var(--rad-lg);padding:12px;cursor:pointer;background:var(--bg);transition:all .12s;font-family:var(--ff)}
+.th-pick:hover{background:var(--bg2)}
+.th-pick.sel{border-width:1.5px}
+.tp-abbr{font-size:10px;font-weight:600;letter-spacing:.1em;margin-bottom:5px}
+.tp-name{font-size:12px;font-weight:500;line-height:1.3;color:var(--txt)}
+.btn-go{width:100%;padding:12px;border-radius:var(--rad);border:0.5px solid var(--brd2);background:var(--bg);font-family:var(--ff);font-size:14px;font-weight:500;cursor:pointer;color:var(--txt);transition:all .12s;margin-top:.5rem}
+.btn-go:hover{background:var(--bg2)}
+.btn-go:disabled{opacity:.35;cursor:not-allowed}
+
+/* FLASHCARDS */
+.fc-hud{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.fc-ctr{font-size:13px;color:var(--txt2)}
+.fc-pct{margin-left:auto;font-size:13px;font-weight:500;color:var(--txt)}
+.fc-wrap{perspective:900px;margin-bottom:1rem;cursor:pointer;height:210px}
+.fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-f,.fc-b{position:absolute;inset:0;backface-visibility:hidden;border:0.5px solid var(--brd);border-radius:var(--rad-lg);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;background:var(--bg)}
+.fc-b{transform:rotateY(180deg)}
+.fc-hint{font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;color:var(--txt3)}
+.fc-term{font-size:18px;font-weight:600;text-align:center;line-height:1.3;color:var(--txt)}
+.fc-def{font-size:13px;line-height:1.6;text-align:center;color:var(--txt)}
+.fc-label{font-size:11px;font-weight:500;padding:3px 9px;border-radius:99px;margin-bottom:10px}
+.fc-nav{display:flex;gap:8px}
+.fc-nav button{flex:1;padding:10px;border-radius:var(--rad);border:0.5px solid var(--brd);background:var(--bg);font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;color:var(--txt);transition:all .12s}
+.fc-nav button:hover{background:var(--bg2)}
+.fc-nav button.ok-btn{border-color:var(--ok-brd);background:var(--ok-bg);color:var(--ok-fg)}
+.fc-nav button.ko-btn{border-color:var(--ko-brd);background:var(--ko-bg);color:var(--ko-fg)}
+.fc-nav button:disabled{opacity:.3;cursor:not-allowed}
+.fc-sub{font-size:12px;color:var(--txt2);text-align:center;margin-top:.5rem}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem}
+.pill{border:0.5px solid var(--brd);border-radius:99px;padding:5px 12px;font-size:12px;cursor:pointer;color:var(--txt2);background:var(--bg);transition:all .12s;font-family:var(--ff)}
+.pill:hover{border-color:var(--brd2);color:var(--txt)}
+.pill.on{border-width:1.5px}
+
+/* QUIZ */
+.q-hud{display:flex;gap:6px;align-items:stretch;margin-bottom:.75rem;flex-wrap:wrap}
+.hc{background:var(--bg2);border-radius:var(--rad);padding:6px 10px;min-width:56px;text-align:center}
+.hl{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--txt2)}
+.hv{font-size:16px;font-weight:600;color:var(--txt);margin-top:1px}
+.hv.timer-warn{color:var(--ko-fg)!important}
+.hsp{flex:1}
+.lives-row{display:flex;gap:3px;justify-content:center;margin-top:3px}
+.heart{width:12px;height:12px;background:var(--ko-fg);border-radius:50% 50% 50% 0/50% 50% 0 50%;transform:rotate(-45deg);transition:opacity .2s}
+.heart.dead{opacity:.18}
+.pgb{height:3px;background:var(--bg2);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.pgf{height:100%;border-radius:2px;transition:width .35s}
+.ldg{display:flex;flex-direction:column;align-items:center;gap:10px;padding:2.5rem 0;color:var(--txt2);font-size:13px}
+.spin{width:20px;height:20px;border:2px solid var(--brd);border-top-color:var(--dic-m);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.qcard{border:0.5px solid var(--brd);border-radius:var(--rad-lg);background:var(--bg);margin-bottom:.75rem;overflow:hidden}
+.q-ctx{padding:10px 14px;font-size:12px;color:var(--txt2);line-height:1.55;font-style:italic;border-bottom:0.5px solid var(--brd);background:var(--bg2)}
+.q-notion{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px 0}
+.q-txt{font-size:14px;line-height:1.55;padding:5px 14px 14px;color:var(--txt)}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.75rem}
+.ch{border:0.5px solid var(--brd);border-radius:var(--rad);padding:10px 12px;cursor:pointer;font-family:var(--ff);font-size:13px;background:var(--bg);color:var(--txt);text-align:left;line-height:1.4;transition:all .1s}
+.ch:hover:not(:disabled){background:var(--bg2);border-color:var(--brd2)}
+.ch.ok{border-color:var(--ok-brd)!important;background:var(--ok-bg)!important;color:var(--ok-fg)!important}
+.ch.ko{border-color:var(--ko-brd)!important;background:var(--ko-bg)!important;color:var(--ko-fg)!important}
+.ch:disabled{cursor:default}
+.fbk{border-radius:var(--rad);padding:10px 13px;font-size:13px;line-height:1.55;margin-bottom:.75rem;display:none}
+.fbk.ok{display:block;background:var(--ok-bg);color:var(--ok-fg);border:0.5px solid var(--ok-brd)}
+.fbk.ko{display:block;background:var(--ko-bg);color:var(--ko-fg);border:0.5px solid var(--ko-brd)}
+.next-btn{width:100%;padding:11px;border-radius:var(--rad);border:0.5px solid var(--brd2);background:var(--bg);font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;color:var(--txt);transition:all .12s;display:none}
+.next-btn:hover{background:var(--bg2)}
+
+/* RESULTS */
+.r-hero{border:0.5px solid var(--brd);border-radius:var(--rad-lg);background:var(--bg);padding:1.5rem;text-align:center;margin-bottom:.75rem}
+.r-big{font-size:52px;font-weight:600;line-height:1;color:var(--txt)}
+.r-max{font-size:20px;color:var(--txt2)}
+.r-grade{font-size:17px;font-weight:500;margin:10px 0 3px;color:var(--txt)}
+.r-sub{font-size:12px;color:var(--txt2)}
+.r-stats{display:flex;justify-content:space-around;border-top:0.5px solid var(--brd);padding-top:1rem;margin-top:1rem}
+.r-stat .rv{font-size:18px;font-weight:600;color:var(--txt)}
+.r-stat .rl{font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.05em}
+.th-results{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.75rem}
+.thr{border:0.5px solid var(--brd);border-radius:var(--rad);padding:10px 12px;background:var(--bg)}
+.thr-nm{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
+.thr-v{font-size:16px;font-weight:600;color:var(--txt)}
+.thr-s{font-size:11px;color:var(--txt2)}
+.r-btn{width:100%;padding:11px;border-radius:var(--rad);border:0.5px solid var(--brd2);background:var(--bg);font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;color:var(--txt);transition:all .12s;margin-bottom:7px}
+.r-btn:hover{background:var(--bg2)}
+.r-btn.sec{color:var(--txt2);border-color:var(--brd)}
+</style>
+</head>
+<body>
+<div id="app">
+<h1 class="sr-only">Révision Technologie 3ème — Brevet des collèges</h1>
+
+<!-- PAGE 0 : ACCUEIL -->
+<div id="p0" class="page on">
+  <div class="home-hdr">
+    <div class="home-ttl">Techno 3ème<span>Révision DNB · Programme cycle 4</span></div>
+    <div class="xtag">🇫🇷 Brevet 2025–2026</div>
+  </div>
+  <div class="prog-row">
+    <div class="prog-cell"><div class="prog-val" id="g-pts">0</div><div class="prog-lbl">points</div></div>
+    <div class="prog-cell"><div class="prog-val" id="g-q">0</div><div class="prog-lbl">questions</div></div>
+    <div class="prog-cell"><div class="prog-val" id="g-pct">–</div><div class="prog-lbl">réussite</div></div>
+  </div>
+  <div class="th-grid" id="th-grid"></div>
+  <div class="mode-lbl">Modes d'entraînement</div>
+  <button class="mode-btn" onclick="goFlash()">
+    <div class="mode-ico" style="background:var(--dic-l)">🃏</div>
+    <div class="mode-txt"><div class="mn">Flashcards — Notions clés</div><div class="md">40 cartes à retourner · Mémorisation · Tous thèmes</div></div>
+    <div class="mode-arr">›</div>
+  </button>
+  <button class="mode-btn" onclick="goQuizPick()">
+    <div class="mode-ico" style="background:var(--ots-l)">🎯</div>
+    <div class="mode-txt"><div class="mn">Quiz par thème</div><div class="md">10 questions · 3 vies · Questions IA · Explications</div></div>
+    <div class="mode-arr">›</div>
+  </button>
+  <button class="mode-btn" onclick="startBrevet()">
+    <div class="mode-ico" style="background:var(--ip-l)">📝</div>
+    <div class="mode-txt"><div class="mn">Mode Brevet — 30 minutes</div><div class="md">15 questions · Tous thèmes · Chronomètre · Format DNB</div></div>
+    <div class="mode-arr">›</div>
+  </button>
+</div>
+
+<!-- PAGE 1 : SÉLECTION THÈME QUIZ -->
+<div id="p1" class="page">
+  <a class="back" onclick="show(0)">← Accueil</a>
+  <div style="font-size:18px;font-weight:600;margin-bottom:4px;color:var(--txt)">Quiz par thème</div>
+  <div style="font-size:12px;color:var(--txt2);margin-bottom:1.25rem">Choisis un thème du programme officiel.</div>
+  <div class="th-picker" id="th-picker"></div>
+  <button class="btn-go" id="quiz-go" disabled onclick="startQuiz()">Choisir un thème ci-dessus</button>
+</div>
+
+<!-- PAGE 2 : QUIZ / BREVET -->
+<div id="p2" class="page">
+  <div class="q-hud" id="q-hud"></div>
+  <div class="pgb"><div class="pgf" id="pgf" style="width:0%"></div></div>
+  <div class="ldg" id="q-ldg"><div class="spin"></div><span>Génération de la question par l'IA…</span></div>
+  <div id="q-area" style="display:none">
+    <div class="qcard">
+      <div class="q-ctx" id="q-ctx"></div>
+      <div class="q-notion" id="q-notion"></div>
+      <div class="q-txt" id="q-txt"></div>
+    </div>
+    <div class="choices" id="q-choices"></div>
+    <div class="fbk" id="q-fbk"></div>
+    <button class="next-btn" id="q-next" onclick="nextQ()">Question suivante →</button>
+  </div>
+</div>
+
+<!-- PAGE 3 : FLASHCARDS -->
+<div id="p3" class="page">
+  <a class="back" onclick="show(0)">← Accueil</a>
+  <div style="font-size:18px;font-weight:600;margin-bottom:.25rem;color:var(--txt)">Flashcards</div>
+  <div style="font-size:12px;color:var(--txt2);margin-bottom:1rem">Clique sur la carte pour retourner · Évalue ta connaissance</div>
+  <div class="pills" id="fc-filters"></div>
+  <div class="fc-hud">
+    <span class="fc-ctr" id="fc-ctr">Carte 1 / 40</span>
+    <span class="fc-pct" id="fc-pct"></span>
+  </div>
+  <div class="fc-wrap" id="fc-wrap" onclick="flipCard()">
+    <div class="fc-inner" id="fc-inner">
+      <div class="fc-f"><div class="fc-hint">Clique pour retourner</div><div class="fc-label" id="fc-label-f"></div><div class="fc-term" id="fc-term"></div></div>
+      <div class="fc-b"><div class="fc-hint">Définition</div><div class="fc-label" id="fc-label-b"></div><div class="fc-def" id="fc-def"></div></div>
+    </div>
+  </div>
+  <div class="fc-sub" id="fc-sub">Retourne la carte avant d'évaluer</div>
+  <div class="fc-nav" style="margin-top:.5rem">
+    <button class="ko-btn" id="fc-ko" onclick="fcAnswer(false)" disabled>✗ À revoir</button>
+    <button onclick="fcSkip()" id="fc-skip" style="flex:.5">→</button>
+    <button class="ok-btn" id="fc-ok" onclick="fcAnswer(true)" disabled>✓ Je sais</button>
+  </div>
+</div>
+
+<!-- PAGE 4 : RÉSULTATS -->
+<div id="p4" class="page">
+  <div class="r-hero">
+    <div><span class="r-big" id="r-sc">0</span><span class="r-max" id="r-max"></span></div>
+    <div class="r-grade" id="r-grade"></div>
+    <div class="r-sub" id="r-sub"></div>
+    <div class="r-stats">
+      <div class="r-stat"><div class="rv" id="r-cor">0</div><div class="rl">Bonnes réponses</div></div>
+      <div class="r-stat"><div class="rv" id="r-tot">0</div><div class="rl">Questions</div></div>
+      <div class="r-stat"><div class="rv" id="r-pct">0%</div><div class="rl">Précision</div></div>
+    </div>
+  </div>
+  <div class="th-results" id="th-results" style="display:none"></div>
+  <button class="r-btn" id="r-replay">Rejouer</button>
+  <button class="r-btn sec" onclick="show(0);renderHome()">Retour à l'accueil</button>
+</div>
+
+</div><!-- #app -->
+
+<script>
+const THEMES={
+  dic:{id:'dic',name:'Design, Innovation & Créativité',abbr:'DIC',h:'var(--dic-h)',l:'var(--dic-l)',m:'var(--dic-m)',
+    pc:'design, innovation, créativité, besoin, cahier des charges (fonctions d\'usage, contraintes, critères d\'appréciation), innovation incrémentale, innovation de rupture, brevet d\'invention (20 ans, nouveauté, inventivité, application industrielle), propriété intellectuelle, démarche créative (brainstorming, matrice morphologique), maquette, prototype, démarche de projet, diagramme de Gantt, planification, antériorités',
+    cards:[
+      {t:'Besoin',d:'Nécessité ou désir éprouvé par un utilisateur qui justifie l\'existence d\'un objet. On l\'identifie en répondant à : « À quoi ça sert ? » (à qui, sur quoi, dans quel but). Le besoin doit être valide, stable et utile.'},
+      {t:'Cahier des charges',d:'Document de référence listant toutes les contraintes et critères du projet : fonctions attendues, durée de vie, sécurité, coût maximum, esthétique, impact environnemental, ergonomie. Il encadre toute la démarche de projet.'},
+      {t:'Fonction d\'usage',d:'Ce que l\'objet doit faire pour l\'utilisateur (son utilité principale). Différente de la fonction d\'estime qui concerne l\'aspect, le confort ou le prestige. Ex : une lampe doit éclairer.'},
+      {t:'Innovation incrémentale',d:'Amélioration progressive d\'un objet existant sans changer son principe de fonctionnement. La solution technique évolue, mais le concept reste le même. Ex : téléphone portable avec batterie plus longue.'},
+      {t:'Innovation de rupture',d:'Nouveau principe de fonctionnement qui remplace totalement l\'ancien et modifie profondément les usages. Ex : moteur électrique vs moteur thermique ; streaming vs DVD ; SSD vs disque dur.'},
+      {t:'Brevet d\'invention',d:'Titre de propriété industrielle délivré par l\'État qui protège une invention pendant 20 ans. Conditions : nouveauté absolue, activité inventive, application industrielle possible. Donne un monopole d\'exploitation.'},
+      {t:'Prototype',d:'Premier exemplaire fonctionnel d\'un objet, fabriqué pour tester et valider des solutions avant la production en série. Différent de la maquette (représentation non fonctionnelle, souvent d\'apparence).'},
+      {t:'Diagramme de Gantt',d:'Outil de planification représentant les tâches d\'un projet sous forme de barres horizontales sur une ligne de temps. Visualise la durée, l\'ordre et les contraintes (antériorités) entre les tâches.'},
+      {t:'Démarche de projet',d:'Méthode structurée : Analyse du besoin → Cahier des charges → Recherche de solutions → Choix → Réalisation → Validation → Communication. S\'applique à tous les projets technologiques.'},
+      {t:'Critère d\'appréciation',d:'Grandeur mesurable évaluant si une fonction est bien remplie. Chaque critère a un niveau (valeur cible) et une limite (valeur minimale acceptable). Ex : autonomie minimale de 8h pour une batterie.'},
+    ]},
+  ots:{id:'ots',name:'Objets Techniques & Société',abbr:'OTS',h:'var(--ots-h)',l:'var(--ots-l)',m:'var(--ots-m)',
+    pc:'lignée d\'objets, famille d\'objets, évolution temporelle, rupture technologique, familles de matériaux : métaux (acier, aluminium, cuivre), polymères/plastiques (PLA, PET, ABS), céramiques (verre, béton), composites (fibre de carbone), naturels/organiques (bois, coton) ; propriétés mécaniques (traction, compression, flexion, torsion, cisaillement) ; cycle de vie (extraction→fabrication→distribution→utilisation→fin de vie), écoconception, indice de réparabilité (0 à 10), sources renouvelables (solaire, éolien, hydraulique, biomasse) et non renouvelables (pétrole, gaz, charbon, nucléaire) ; rendement η=E_utile/E_totale, développement durable, ACV',
+    cards:[
+      {t:'Lignée d\'objets',d:'Suite chronologique d\'objets remplissant le même usage, évoluant dans le temps grâce aux innovations successives. Ex : du télégraphe au téléphone filaire, puis au mobile, puis au smartphone.'},
+      {t:'Famille d\'objets',d:'Groupe d\'objets techniques partageant le même principe de fonctionnement pour des usages variés. Ex : tous les objets utilisant un moteur électrique (ventilateur, voiture électrique, perceuse, aspirateur).'},
+      {t:'5 familles de matériaux',d:'1. Métaux & alliages (acier, alu, cuivre). 2. Polymères/Plastiques (PLA, PET, ABS). 3. Céramiques (verre, béton, porcelaine). 4. Composites (fibre de carbone + résine). 5. Naturels/Organiques (bois, coton, cuir).'},
+      {t:'Propriétés mécaniques',d:'Traction (étirement) · Compression (écrasement) · Flexion (courbure) · Torsion (rotation d\'une partie) · Cisaillement (glissement de deux parties). Le choix du matériau dépend des contraintes subies.'},
+      {t:'Cycle de vie d\'un produit',d:'5 étapes : 1. Extraction des matières premières → 2. Fabrication → 3. Distribution & transport → 4. Utilisation → 5. Fin de vie (réemploi, recyclage, valorisation énergétique, mise en décharge).'},
+      {t:'Indice de réparabilité',d:'Note de 0 à 10 indiquant la facilité à réparer un produit. Critères : disponibilité des pièces, accès à la documentation, accessibilité des pièces, prix des pièces de rechange.'},
+      {t:'Écoconception',d:'Démarche de conception intégrant les préoccupations environnementales dès le départ : matériaux recyclables, réduction des déchets, facilitation du démontage, sobriété énergétique, durée de vie allongée.'},
+      {t:'Rendement énergétique',d:'η = Énergie utile produite / Énergie totale consommée. Toujours entre 0 et 1 (ou 0% et 100%). Les pertes : chaleur, frottements, vibrations. Un bon rendement = moins de gaspillage.'},
+      {t:'Énergies renouvelables',d:'Sources inépuisables à l\'échelle humaine : solaire, éolien, hydraulique, biomasse, géothermique. Opposées aux fossiles (pétrole, gaz, charbon) et au nucléaire, qui sont non renouvelables.'},
+      {t:'Analyse du cycle de vie (ACV)',d:'Méthode d\'évaluation de l\'impact environnemental d\'un produit sur l\'ensemble de son existence ("du berceau à la tombe"). Prend en compte ressources consommées, émissions CO₂ et déchets produits.'},
+    ]},
+  mso:{id:'mso',name:'Modélisation & Simulation',abbr:'MSO',h:'var(--mso-h)',l:'var(--mso-l)',m:'var(--mso-m)',
+    pc:'chaîne d\'énergie (alimenter→distribuer→convertir→transmettre→agir), chaîne d\'information (acquérir→traiter→communiquer), capteur (thermistance, photorésistance, accéléromètre, ultrason), actionneur (moteur DC, servo, LED, buzzer, pompe), signal analogique (continu), signal numérique (0 ou 1), convertisseur analogique-numérique (CAN), représentation fonctionnelle (FAST, bête à cornes), représentation structurelle, CAO (Fusion 360, Tinkercad), format STL, impression 3D/fabrication additive, PLA, découpe laser, fraisage CNC (fabrication soustractive), simulation numérique, écart simulation/réalité',
+    cards:[
+      {t:'Chaîne d\'énergie',d:'Décrit comment l\'énergie circule : Alimenter (source) → Distribuer (interrupteur, variateur) → Convertir (moteur, résistance) → Transmettre (engrenages, courroie) → Agir sur l\'environnement (roue, ventilateur, chaleur).'},
+      {t:'Chaîne d\'information',d:'Décrit le traitement de l\'information : Acquérir (capteur mesure) → Traiter (microcontrôleur décide) → Communiquer (actionneur agit, afficheur informe). Ex : capteur de température → Arduino → ventilateur.'},
+      {t:'Capteur',d:'Composant mesurant une grandeur physique et la convertissant en signal exploitable. Ex : thermistance (température), photorésistance (luminosité), accéléromètre (mouvement), capteur ultrason (distance).'},
+      {t:'Actionneur',d:'Composant convertissant un signal électrique en action physique. Ex : moteur DC → rotation, servo-moteur → angle précis, LED → lumière, résistance chauffante → chaleur, buzzer → son.'},
+      {t:'Signal analogique',d:'Signal dont la valeur varie de façon continue dans une plage donnée (ex : 0 V à 5 V). Reflète fidèlement la grandeur physique mesurée. Doit être converti (CAN) pour être traité par un microcontrôleur.'},
+      {t:'Signal numérique',d:'Signal ne prenant que deux valeurs discrètes : 0 (FAUX, bas) ou 1 (VRAI, haut). Ex : bouton poussoir : 0 = relâché, 1 = appuyé. Les microcontrôleurs ne traitent que des signaux numériques.'},
+      {t:'CAO',d:'Conception Assistée par Ordinateur : logiciel de modélisation 3D (Fusion 360, SolidWorks, Tinkercad). Le fichier STL est le format standard pour l\'impression 3D. Permet simulation et validation avant fabrication réelle.'},
+      {t:'Fabrication additive (impression 3D)',d:'Procédé construisant un objet couche par couche à partir d\'un fichier numérique. Matériau principal : PLA (plastique biodégradable). Avantages : formes complexes, pas de gaspillage, prototype rapide.'},
+      {t:'Fabrication soustractive',d:'Procédé obtenant la forme finale en enlevant de la matière d\'un bloc brut. Découpe laser (2D, très précise) et fraisage CNC (3D). Opposée à la fabrication additive (impression 3D).'},
+      {t:'Simulation numérique',d:'Utilisation d\'un logiciel pour prédire le comportement d\'un objet ou système sans le fabriquer. Permet de vérifier si le cahier des charges est respecté. On compare ensuite les résultats à l\'expérimentation réelle.'},
+    ]},
+  ip:{id:'ip',name:'Informatique & Programmation',abbr:'IP',h:'var(--ip-h)',l:'var(--ip-l)',m:'var(--ip-m)',
+    pc:'réseaux : architecture client/serveur, terminal, carte réseau, commutateur/switch, routeur, serveur, adresse IP (IPv4 : 4 octets de 0 à 255), DNS (traduit noms en adresses IP), protocoles TCP/IP, HTTP (port 80) et HTTPS (port 443, chiffré), WiFi, Bluetooth, fibre optique ; algorithme (instructions précises et finies), algorigramme (ovale=début/fin, rectangle=action, losange=condition, parallélogramme=entrée/sortie), séquence, alternative (SI...ALORS...SINON), boucle bornée (POUR), boucle non bornée (TANT QUE), variable (nom, type, valeur) ; types : int, float, str, bool ; Scratch : blocs, événements, boucles, conditions, variables ; Python : print(), input(), if/elif/else, for/range(), while, def/return, indentation ; microcontrôleur, Arduino, systèmes embarqués',
+    cards:[
+      {t:'Architecture réseau',d:'Terminal (PC, smartphone) → Carte réseau (interface) → Commutateur/Switch (réseau local) → Routeur (relie plusieurs réseaux, route vers Internet) → Serveur (fournit ressources et services).'},
+      {t:'Adresse IP',d:'Identifiant numérique unique attribué à chaque machine sur un réseau. Format IPv4 : 4 nombres entre 0 et 255 séparés par des points (ex : 192.168.1.42). Fonctionne comme une adresse postale numérique.'},
+      {t:'DNS',d:'Domain Name System : service traduisant les noms de domaine lisibles (ex : education.gouv.fr) en adresses IP compréhensibles par les machines (ex : 185.75.143.106). Sans DNS, il faudrait mémoriser des suites de chiffres.'},
+      {t:'Protocoles HTTP et HTTPS',d:'HTTP : protocole du web pour l\'échange de pages entre navigateur (client) et serveur. HTTPS : version sécurisée avec chiffrement TLS/SSL, identifiable par le cadenas dans la barre d\'adresse.'},
+      {t:'Algorithme',d:'Suite d\'instructions précises, non ambiguës et en nombre fini permettant de résoudre un problème. Indépendant du langage de programmation. Représentable par du pseudo-code ou un algorigramme.'},
+      {t:'Algorigramme — symboles',d:'Ovale : Début/Fin. Rectangle : Action/Traitement. Losange : Condition/Test (deux sorties OUI/NON). Parallélogramme : Entrée (lire) ou Sortie (afficher). Flèches : sens du déroulement.'},
+      {t:'Structures de contrôle',d:'Séquence : ordre. Alternative : SI condition ALORS … SINON … FIN SI. Boucle bornée : POUR i ALLANT DE 1 À n (répétitions connues). Boucle non bornée : TANT QUE condition FAIRE …'},
+      {t:'Variable (informatique)',d:'Espace mémoire nommé stockant une valeur modifiable. Caractérisée par : un nom, un type et une valeur. Exemples Python : age = 15 | temperature = 36.6 | prenom = "Alice" | actif = True'},
+      {t:'Scratch vs Python',d:'Scratch : blocs graphiques, idéal pour débuter. Python : langage textuel professionnel. Équivalences : "Répéter 10 fois" → for i in range(10): | "Si…alors…sinon" → if…else: | "Dire" → print() | "Définir" → def nom():'},
+      {t:'Microcontrôleur & systèmes embarqués',d:'Microcontrôleur : circuit intégré combinant processeur, mémoire et entrées/sorties (ex : Arduino). Système embarqué : système informatique intégré dans un objet technique (robot, voiture, électroménager) pour le commander.'},
+    ]}
+};
+
+const G={gPts:0,gQ:0,gCor:0,thAns:{dic:0,ots:0,mso:0,ip:0},thCor:{dic:0,ots:0,mso:0,ip:0},mode:'quiz',qTheme:'dic',qi:0,maxQ:10,lives:3,score:0,correct:0,total:0,sessionN:{},answered:false,Q:null,timer:null,timeLeft:1800,fcDeck:[],fcIdx:0,fcFlipped:false,fcKnown:0,fcFilter:'all'};
+
+function show(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.getElementById('p'+n).classList.add('on');}
+
+function renderHome(){
+  document.getElementById('g-pts').textContent=G.gPts;
+  document.getElementById('g-q').textContent=G.gQ;
+  document.getElementById('g-pct').textContent=G.gQ>0?Math.round(G.gCor/G.gQ*100)+'%':'–';
+  const ids=['dic','ots','mso','ip'];
+  document.getElementById('th-grid').innerHTML=ids.map(id=>{const T=THEMES[id],a=G.thAns[id],c=G.thCor[id],p=a>0?Math.round(c/a*100):0;return`<div class="th-card" onclick="openThemeFiche('${id}')"><div class="th-bar" style="width:${p}%;background:${T.m}"></div><div class="th-abbr" style="color:${T.m}">${T.abbr}</div><div class="th-name">${T.name}</div><div class="th-stat">${a>0?p+'% · '+a+' questions':'Non commencé'}</div></div>`;}).join('');
+}
+
+function openThemeFiche(id){G.fcFilter=id;goFlash();}
+
+let pickedTh=null;
+function goQuizPick(){
+  pickedTh=null;
+  const ids=['dic','ots','mso','ip'];
+  document.getElementById('th-picker').innerHTML=ids.map(id=>{const T=THEMES[id];return`<div class="th-pick" id="tp-${id}" onclick="pickTh('${id}')"><div class="tp-abbr" style="color:${T.m}">${T.abbr}</div><div class="tp-name">${T.name}</div></div>`;}).join('');
+  document.getElementById('quiz-go').disabled=true;
+  document.getElementById('quiz-go').textContent='Choisir un thème ci-dessus';
+  show(1);
+}
+
+function pickTh(id){
+  pickedTh=id;
+  document.querySelectorAll('.th-pick').forEach(el=>{const tid=el.id.replace('tp-','');const T=THEMES[tid];el.classList.toggle('sel',tid===id);el.style.borderColor=tid===id?T.m:'var(--brd)';});
+  const T=THEMES[id];document.getElementById('quiz-go').disabled=false;document.getElementById('quiz-go').textContent=`Commencer — ${T.name} →`;
+}
+
+function startQuiz(){G.mode='quiz';G.qTheme=pickedTh;G.qi=0;G.maxQ=10;G.lives=3;G.score=0;G.correct=0;G.total=0;G.sessionN={};G.answered=false;clearInterval(G.timer);show(2);renderHUD();loadQuestion();}
+function startBrevet(){G.mode='brevet';G.qTheme=null;G.qi=0;G.maxQ=15;G.lives=99;G.score=0;G.correct=0;G.total=0;G.sessionN={};G.answered=false;G.timeLeft=1800;show(2);renderHUD();launchTimer();loadQuestion();}
+
+function launchTimer(){clearInterval(G.timer);G.timer=setInterval(()=>{G.timeLeft--;const el=document.getElementById('hud-timer');if(el){el.textContent=fmt(G.timeLeft);el.classList.toggle('timer-warn',G.timeLeft<=300);}if(G.timeLeft<=0){clearInterval(G.timer);endGame();}},1000);}
+function fmt(s){return Math.floor(s/60)+':'+(s%60+'').padStart(2,'0');}
+
+function renderHUD(){
+  const T=G.qTheme?THEMES[G.qTheme]:null;
+  let h='';
+  if(G.mode==='brevet')h+=`<div class="hc"><div class="hl">Brevet</div><div class="hv" id="hud-timer">${fmt(G.timeLeft)}</div></div>`;
+  else if(T)h+=`<div class="hc"><div class="hl">Thème</div><div class="hv" style="font-size:12px;color:${T.m}">${T.abbr}</div></div>`;
+  h+=`<div class="hc"><div class="hl">Score</div><div class="hv" id="hud-sc">${G.score}</div></div>`;
+  h+=`<div class="hc"><div class="hl">Q</div><div class="hv">${G.qi+1}/${G.maxQ}</div></div>`;
+  if(G.mode==='quiz')h+=`<div class="hsp"></div><div class="hc"><div class="hl">Vies</div><div class="lives-row">${[0,1,2].map(i=>`<div class="heart${i>=G.lives?' dead':''}"></div>`).join('')}</div></div>`;
+  document.getElementById('q-hud').innerHTML=h;
+  document.getElementById('pgf').style.width=(G.qi/G.maxQ*100)+'%';
+  document.getElementById('pgf').style.background=T?T.m:'var(--dic-m)';
+}
+
+function brevPick(){const ids=['dic','ots','mso','ip'];const c={dic:0,ots:0,mso:0,ip:0};ids.forEach(id=>{c[id]=(G.sessionN[id]||[]).length;});const min=Math.min(...Object.values(c));const cands=ids.filter(id=>c[id]===min);return cands[Math.floor(Math.random()*cands.length)];}
+
+async function loadQuestion(){
+  document.getElementById('q-ldg').style.display='flex';
+  document.getElementById('q-area').style.display='none';
+  document.getElementById('q-fbk').className='fbk';
+  document.getElementById('q-next').style.display='none';
+  G.answered=false;
+  const thId=G.mode==='brevet'?brevPick():G.qTheme;
+  const T=THEMES[thId];
+  const prev=(G.sessionN[thId]||[]).slice(-5).join(', ');
+  const avoid=prev?`Évite ces notions déjà posées : ${prev}. `:'';
+  const prompt=`Tu es professeur de Technologie au collège en France. Tu crées des questions pour l'épreuve de sciences-technologie du DNB (brevet des collèges) pour des élèves de 3ème.\n\nTHÈME : ${T.name}\nNOTIONS DU PROGRAMME OFFICIEL CYCLE 4 : ${T.pc}\n${avoid}\nGénère UNE question QCM de niveau brevet. La question doit :\n- Commencer si possible par une mise en situation concrète (objet du quotidien, 1 à 3 phrases)\n- Porter sur une notion précise et importante du programme\n- Avoir 4 propositions de réponse plausibles et discriminantes\n\nRéponds UNIQUEMENT en JSON valide (sans markdown, sans backticks) :\n{"ctx":"mise en situation ou chaîne vide si non pertinente","notion":"Nom exact de la notion du programme","q":"La question posée","choices":["A","B","C","D"],"correct":0,"expl":"Explication pédagogique en 2-3 phrases avec la règle ou définition clé.","thId":"${thId}"}\ncorrect = index 0 à 3 de la bonne réponse.`;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    const raw=data.content.map(b=>b.text||'').join('').replace(/```\w*/g,'').trim();
+    G.Q=JSON.parse(raw);
+  }catch(e){G.Q=fallback(thId);}
+  if(!G.sessionN[thId])G.sessionN[thId]=[];
+  G.sessionN[thId].push(G.Q.notion||G.Q.q.substring(0,35));
+  renderQ();
+}
+
+function fallback(thId){const fb={dic:{ctx:'Un lycéen veut créer une lampe de bureau rechargeable.',notion:'Cahier des charges',q:'Parmi ces éléments, lequel doit figurer dans le cahier des charges de la lampe ?',choices:['Le prénom de l\'inventeur','L\'autonomie minimale de la batterie','La couleur préférée du lycéen','Le nom du magasin de vente'],correct:1,expl:'Le cahier des charges liste toutes les contraintes et critères mesurables du projet : autonomie, intensité lumineuse, coût maximum, durée de vie… C\'est le document de référence de toute la démarche de projet.',thId:'dic'},ots:{ctx:'Un fabricant choisit un matériau pour les pales d\'un ventilateur soumises à des forces répétées.',notion:'Propriétés mécaniques des matériaux',q:'Quelle propriété mécanique est la plus importante à vérifier pour ces pales ?',choices:['La conductivité thermique','La résistance à la flexion','La transparence optique','La densité volumique'],correct:1,expl:'Les pales d\'un ventilateur se courbent sous l\'effet de l\'air et des vibrations : elles subissent des contraintes de flexion répétées. Le matériau doit donc avoir une bonne résistance à la flexion.',thId:'ots'},mso:{ctx:'Un arrosage automatique est équipé d\'un capteur d\'humidité du sol. Quand le sol est trop sec, la pompe s\'enclenche pendant 5 minutes.',notion:'Chaîne d\'information',q:'Quel composant assure la fonction "Acquérir" dans la chaîne d\'information de ce système ?',choices:['La pompe à eau','L\'interrupteur général','Le capteur d\'humidité du sol','La minuterie de 5 minutes'],correct:2,expl:'Dans la chaîne d\'information, "Acquérir" correspond au capteur qui mesure une grandeur physique de l\'environnement. Ici, le capteur d\'humidité du sol mesure le taux d\'humidité et fournit un signal au système de traitement.',thId:'mso'},ip:{ctx:'Une élève écrit un programme Python pour calculer la moyenne de trois notes.',notion:'Variable et type de donnée',q:'Pour stocker la note 15,5 dans une variable Python, quel type faut-il utiliser ?',choices:['str (chaîne de caractères)','bool (booléen)','int (entier)','float (réel)'],correct:3,expl:'Le type float (nombre réel) stocke des valeurs décimales comme 15,5. Le type int est réservé aux entiers (sans virgule), str aux textes, bool aux valeurs Vrai/Faux. En Python : note = 15.5',thId:'ip'}};return fb[thId]||fb.dic;}
+
+function renderQ(){
+  document.getElementById('q-ldg').style.display='none';
+  document.getElementById('q-area').style.display='block';
+  const Q=G.Q;const T=THEMES[Q.thId||G.qTheme];
+  const ctx=document.getElementById('q-ctx');
+  if(Q.ctx&&Q.ctx.trim()){ctx.textContent=Q.ctx;ctx.style.display='block';}else{ctx.style.display='none';}
+  document.getElementById('q-notion').style.color=T.m;
+  document.getElementById('q-notion').textContent=Q.notion||T.abbr;
+  document.getElementById('q-txt').textContent=Q.q;
+  document.getElementById('q-choices').innerHTML=Q.choices.map((c,i)=>`<button class="ch" onclick="answer(${i})">${c}</button>`).join('');
+  renderHUD();
+}
+
+function answer(idx){
+  if(G.answered)return;G.answered=true;
+  const Q=G.Q;const thId=Q.thId||G.qTheme;
+  const btns=document.querySelectorAll('.ch');btns.forEach(b=>b.disabled=true);
+  const ok=idx===Q.correct;btns[Q.correct].classList.add('ok');if(!ok)btns[idx].classList.add('ko');
+  G.total++;G.gQ++;G.thAns[thId]=(G.thAns[thId]||0)+1;
+  if(ok){const pts=G.mode==='brevet'?20:10;G.score+=pts;G.correct++;G.gCor++;G.gPts+=pts;G.thCor[thId]=(G.thCor[thId]||0)+1;}
+  else if(G.mode==='quiz'){G.lives--;const hearts=document.querySelectorAll('.heart');hearts.forEach((h,i)=>h.classList.toggle('dead',i>=G.lives));}
+  document.getElementById('hud-sc')&&(document.getElementById('hud-sc').textContent=G.score);
+  const fbk=document.getElementById('q-fbk');fbk.className='fbk '+(ok?'ok':'ko');fbk.innerHTML=(ok?'<strong>Correct !</strong> ':'<strong>Incorrect.</strong> ')+Q.expl;
+  const nb=document.getElementById('q-next');nb.style.display='block';
+  const isLast=(G.mode==='quiz'&&(G.lives<=0||G.qi+1>=G.maxQ))||(G.mode==='brevet'&&G.qi+1>=G.maxQ);
+  nb.textContent=isLast?'Voir les résultats →':'Question suivante →';nb.onclick=isLast?endGame:nextQ;
+}
+
+function nextQ(){G.qi++;document.getElementById('q-next').style.display='none';loadQuestion();}
+
+function endGame(){
+  clearInterval(G.timer);show(4);
+  const pct=G.total>0?Math.round(G.correct/G.total*100):0;
+  const maxPts=G.maxQ*(G.mode==='brevet'?20:10);
+  document.getElementById('r-sc').textContent=G.score;document.getElementById('r-max').textContent=' / '+maxPts;
+  document.getElementById('r-cor').textContent=G.correct;document.getElementById('r-tot').textContent=G.total;document.getElementById('r-pct').textContent=pct+'%';
+  const gs=[[90,'Excellent !','Tu maîtrises le programme — le brevet est à ta portée.'],[70,'Très bien !','Encore quelques révisions et c\'est gagné.'],[50,'Bien !','Revois les notions ratées, tu progresses.'],[0,'Continue !','Utilise les flashcards pour consolider les bases.']];
+  const g=gs.find(([t])=>pct>=t);document.getElementById('r-grade').textContent=g[1];document.getElementById('r-sub').textContent=g[2];
+  const bd=document.getElementById('th-results');
+  if(G.mode==='brevet'){bd.style.display='grid';bd.innerHTML=['dic','ots','mso','ip'].map(id=>{const T=THEMES[id],a=G.thAns[id]||0,c=G.thCor[id]||0;return`<div class="thr"><div class="thr-nm" style="color:${T.m}">${T.abbr}</div><div class="thr-v">${a?Math.round(c/a*100)+'%':'–'}</div><div class="thr-s">${c}/${a} bonnes réponses</div></div>`;}).join('');}
+  else bd.style.display='none';
+  document.getElementById('r-replay').onclick=G.mode==='brevet'?startBrevet:()=>{goQuizPick();};
+}
+
+function goFlash(){
+  let deck=[];const ids=['dic','ots','mso','ip'];
+  ids.forEach(id=>{const T=THEMES[id];T.cards.forEach(c=>deck.push({...c,thId:id,thName:T.abbr,thM:T.m,thL:T.l}));});
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+  if(G.fcFilter&&G.fcFilter!=='all')deck=deck.filter(c=>c.thId===G.fcFilter);
+  G.fcDeck=deck;G.fcIdx=0;G.fcFlipped=false;G.fcKnown=0;
+  const fids=[{id:'all',label:'Tous',m:'var(--txt2)'},...ids.map(id=>({id,label:THEMES[id].abbr,m:THEMES[id].m}))];
+  document.getElementById('fc-filters').innerHTML=fids.map(f=>`<span class="pill${(f.id===G.fcFilter||(G.fcFilter==='all'&&f.id==='all'))?' on':''}" style="${f.id!=='all'?'border-color:'+THEMES[f.id]?.m+';color:'+THEMES[f.id]?.m:''}" onclick="setFcFilter('${f.id}')">${f.label}</span>`).join('');
+  show(3);renderCard();
+}
+
+function setFcFilter(id){G.fcFilter=id;goFlash();}
+
+function renderCard(){
+  if(!G.fcDeck.length)return;
+  const c=G.fcDeck[G.fcIdx];
+  document.getElementById('fc-ctr').textContent=`Carte ${G.fcIdx+1} / ${G.fcDeck.length}`;
+  document.getElementById('fc-pct').textContent=G.fcIdx>0?`${Math.round(G.fcKnown/G.fcIdx*100)}% maîtrisé`:'';
+  document.getElementById('fc-label-f').textContent=c.thName;
+  document.getElementById('fc-label-f').style.cssText=`color:${c.thM};background:${c.thL}`;
+  document.getElementById('fc-label-b').textContent=c.thName;
+  document.getElementById('fc-label-b').style.cssText=`color:${c.thM};background:${c.thL}`;
+  document.getElementById('fc-term').textContent=c.t;
+  document.getElementById('fc-def').textContent=c.d;
+  G.fcFlipped=false;document.getElementById('fc-inner').classList.remove('flipped');
+  document.getElementById('fc-sub').textContent='Retourne la carte avant d\'évaluer';
+  document.getElementById('fc-ok').disabled=true;document.getElementById('fc-ko').disabled=true;
+}
+
+function flipCard(){G.fcFlipped=!G.fcFlipped;document.getElementById('fc-inner').classList.toggle('flipped',G.fcFlipped);if(G.fcFlipped){document.getElementById('fc-sub').textContent='Est-ce que tu connaissais cette définition ?';document.getElementById('fc-ok').disabled=false;document.getElementById('fc-ko').disabled=false;}}
+function fcAnswer(known){if(known)G.fcKnown++;G.fcIdx++;if(G.fcIdx>=G.fcDeck.length){alert('Paquet terminé ! Tu connaissais '+G.fcKnown+'/'+G.fcDeck.length+' cartes ('+Math.round(G.fcKnown/G.fcDeck.length*100)+'%). Continue à t\'entraîner !');G.fcIdx=0;G.fcKnown=0;}renderCard();}
+function fcSkip(){G.fcIdx=(G.fcIdx+1)%G.fcDeck.length;renderCard();}
+
+renderHome();
+</script>
+</body>
+</html>
